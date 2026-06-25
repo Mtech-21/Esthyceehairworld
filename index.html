@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EsthyCee Hair World | Premium Boutique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-canvas text-primary font-sans transition-colors duration-300">
+
+    <header class="sticky top-0 z-40 bg-surface shadow-md border-b border-rose-gold/20 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <button id="menuBtn" class="text-xl p-1 text-accent hover:opacity-80 focus:outline-none">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+            
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full border border-accent/40 overflow-hidden bg-white flex items-center justify-center shadow-inner">
+                    <img src="Images/IMG-20260604-WA0099.jpg" alt="EsthyCee Logo" class="w-full h-full object-cover scale-110">
+                </div>
+                <div class="flex flex-col">
+                    <h1 class="font-serif text-base font-bold tracking-tight text-accent leading-none">EsthyCee</h1>
+                    <span class="text-[9px] uppercase tracking-widest opacity-60 font-bold text-muted">Hair World</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex-1 max-w-md mx-4 hidden md:block relative">
+            <input type="text" id="desktopSearch" oninput="handleSearch(this.value)" placeholder="Search premium bone straight, frontal wigs..." class="w-full bg-canvas border border-accent/20 rounded-xl px-4 py-1.5 pl-10 text-sm focus:outline-none focus:border-accent">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-xs text-accent opacity-50"></i>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button id="themeToggle" class="text-base p-1 text-accent hover:opacity-70 transition-opacity">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button id="cartBtn" class="relative text-base p-1 text-accent hover:opacity-70 transition-opacity">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cartCount" class="absolute -top-1.5 -right-1.5 bg-accent text-white font-sans text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="p-3 bg-surface md:hidden border-b border-rose-gold/10">
+        <div class="relative w-full">
+            <input type="text" id="mobileSearch" oninput="handleSearch(this.value)" placeholder="Search premium boutique inventory..." class="w-full bg-canvas border border-accent/20 rounded-xl px-4 py-2 pl-10 text-xs focus:outline-none focus:border-accent">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-xs text-accent opacity-50"></i>
+        </div>
+    </div>
+
+    <div id="sidebarDrawer" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div id="drawerContent" class="w-72 h-full bg-surface p-5 flex flex-col transform -translate-x-full transition-transform duration-300 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-rose-gold/10 pb-4 mb-4">
+                <h2 class="font-serif text-base font-bold text-accent">Boutique Menu</h2>
+                <button id="closeDrawerBtn" class="text-accent hover:opacity-70"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <nav class="flex-1 space-y-1">
+                <button onclick="switchView('storefront')" class="w-full text-left flex items-center gap-3 p-2.5 rounded-xl hover:bg-canvas text-sm transition-colors"><i class="fa-solid fa-store text-accent w-5"></i> Boutique Grid</button>
+                <button onclick="switchView('account')" class="w-full text-left flex items-center gap-3 p-2.5 rounded-xl hover:bg-canvas text-sm transition-colors"><i class="fa-solid fa-user-shield text-accent w-5"></i> Account</button>
+                <button onclick="switchView('inbox')" class="w-full text-left flex items-center gap-3 p-2.5 rounded-xl hover:bg-canvas text-sm transition-colors relative">
+                    <i class="fa-solid fa-receipt text-accent w-5"></i> Order Ledger
+                    <span id="inboxBadge" class="absolute right-3 bg-accent text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                </button>
+                <button onclick="switchView('wishlist')" class="w-full text-left flex items-center gap-3 p-2.5 rounded-xl hover:bg-canvas text-sm transition-colors"><i class="fa-solid fa-heart text-accent w-5"></i> Saved Collection</button>
+            </nav>
+            <div class="border-t border-rose-gold/10 pt-4 pb-4 space-y-2">
+                <p class="text-[10px] uppercase font-bold tracking-wider text-muted px-2">Support Desk</p>
+                <div class="grid grid-cols-2 gap-2 px-1">
+                    <a href="https://wa.link/bzgkay" target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition-colors text-[11px] shadow-sm">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:akpulonuchidinma@gmail.com" class="bg-zinc-800 hover:bg-black text-white font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition-colors text-[11px] shadow-sm">
+                        <i class="fa-solid fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-6 min-h-screen relative">
+
+        <section id="view-storefront" class="app-view relative">
+
+            <div id="storefrontGatekeeper"
+                 class="bg-accent/10 border border-accent/20 rounded-2xl p-4 mb-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="flex items-center gap-3 text-center sm:text-left">
+                    <i class="fa-solid fa-lock text-accent text-lg flex-shrink-0"></i>
+                    <p class="text-xs text-muted">
+                        <span class="font-bold text-accent">Browse freely!</span> Sign in to unlock your shopping bag, wishlist, and account features.
+                    </p>
+                </div>
+                <button
+                    onclick="switchView('account')"
+                    class="bg-accent text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest flex-shrink-0">
+                    Sign In Now
+                </button>
+            </div>
+        
+            <div id="productGrid"
+                 class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+            </div>
+        
+        </section>
+
+        <section id="view-product-detail" class="app-view hidden max-w-4xl mx-auto bg-surface rounded-2xl p-4 md:p-8 shadow-md border border-rose-gold/10">
+            <button onclick="switchView('storefront')" class="mb-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent hover:opacity-70">
+                <i class="fa-solid fa-chevron-left"></i> Return to Grid
+            </button>
+            <div class="grid md:grid-cols-2 gap-6 md:gap-10" id="productDetailContent"></div>
+        </section>
+
+        <!-- FIX 3: Removed the stray </div> that appeared right after the opening of this section -->
+        <section id="view-account" class="app-view hidden max-w-md mx-auto space-y-6">
+            <div class="bg-surface rounded-2xl p-6 shadow-xl border border-accent/20">
+                <div id="authContainer">
+                    <h2 class="font-serif text-xl font-bold mb-1 text-center text-accent">Boutique Verification</h2>
+                    <p class="text-[11px] text-muted text-center mb-6">Verify your profile credentials to automatically coordinate localized currencies.</p>
+                    
+                    <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted">Full Identification Name</label>
+                            <input type="text" id="authName" class="w-full p-3 rounded-xl text-xs bg-canvas border border-rose-gold/20" placeholder="Molly Owen">
+                        </div>
+                    
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted">Email Terminal</label>
+                            <input type="email" id="authContact" class="w-full p-3 rounded-xl text-xs bg-canvas border border-rose-gold/20" placeholder="name@mail.com" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted">Mobile Phone Number</label>
+                            <input type="tel" id="authPhone" class="w-full p-3 rounded-xl text-xs bg-canvas border border-rose-gold/20" placeholder="e.g. +23480..." required>
+                        </div>
+                    
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted">Secure Access Password</label>
+                            <div class="relative">
+                                <input type="password" id="authPassword" class="w-full p-3 rounded-xl text-xs bg-canvas border border-rose-gold/20 pr-10" placeholder="••••••••" required>
+                                <button type="button" onclick="togglePasswordVisibility('authPassword', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-accent opacity-70 hover:opacity-100">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted">Market Node Target</label>
+                            <select id="authCountry" class="w-full p-3 rounded-xl text-xs bg-canvas border border-rose-gold/20 appearance-none font-bold">
+                                <option value="Nigeria">Nigeria (₦ - NGN Market)</option>
+                                <option value="Ghana">Ghana (₵ - GHS Market)</option>
+                            </select>
+                        </div>
+                    
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted">Delivery Manifest Coordinates</label>
+                            <textarea id="authAddress" rows="2" class="w-full p-3 rounded-xl text-xs bg-canvas border border-rose-gold/20 resize-none" placeholder="Write full delivery address drop point here..."></textarea>
+                        </div>
+                    
+                        <button type="submit" id="authSubmitBtn" class="w-full bg-accent text-white font-sans font-bold py-3.5 rounded-xl text-xs uppercase tracking-widest shadow-md hover:opacity-90 transition-opacity">
+                            Secure Access
+                        </button>
+
+                        <div class="text-center pt-2">
+                            <button type="button" onclick="revealRecoveryInterface()" class="text-[11px] font-bold text-accent/70 hover:text-accent tracking-wide underline cursor-pointer">
+                                Forgot Security Access Password Key?
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="otpContainer" class="hidden text-center space-y-4 py-2">
+                    <div class="text-accent text-3xl"><i class="fa-solid fa-shield-halved animate-pulse"></i></div>
+                    <div class="bg-amber-50 dark:bg-amber-950/20 border border-amber-200/50 p-3 rounded-xl">
+                        <p id="otpNoticeMessage" class="text-[11px] font-sans font-bold text-amber-800 dark:text-amber-400"></p>
+                    </div>
+                    <input type="text" id="otpInputField" maxlength="6" placeholder="000000" class="w-full bg-canvas border-2 border-accent rounded-xl px-4 py-3 text-center font-mono tracking-[0.5em] text-sm font-bold focus:outline-none">
+                    <div class="text-xs font-bold text-accent">Security Window Closes In: <span id="otpCountdownClock">02:00</span></div>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="resetAuthFlow()" class="w-1/2 bg-canvas border border-rose-gold py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">Cancel</button>
+                        <button type="button" onclick="confirmOTPCode()" class="w-1/2 bg-accent text-white py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md hover:opacity-90 transition-opacity">Verify Identity</button>
+                    </div>
+                </div>
+
+                <div id="recoveryContainer" class="hidden space-y-4 py-2">
+                    <div class="text-center space-y-1">
+                        <h3 class="font-serif text-sm font-bold text-accent tracking-wide uppercase">Credentials Restoration Portal</h3>
+                        <p id="recoveryStatusNotice" class="text-[11px] text-muted leading-relaxed">Provide account terminal registration email to start verification node routing.</p>
+                    </div>
+
+                    <div id="recoveryEmailBlock" class="space-y-3">
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted block mb-1">Registered Email Address</label>
+                            <input type="email" id="recoveryEmailField" placeholder="example@domain.com" class="w-full p-3 rounded-xl text-xs bg-canvas border border-rose-gold/20 focus:outline-none">
+                        </div>
+                        <button type="button" onclick="submitForgotPasswordRequest()" class="w-full bg-accent text-white font-sans font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:opacity-90 transition-opacity">
+                            Dispatch Recovery Token
+                        </button>
+                    </div>
+
+                    <div id="recoveryResetBlock" class="hidden space-y-3">
+                        <div class="bg-amber-50 dark:bg-amber-950/20 border border-amber-200/50 p-2.5 rounded-xl text-center">
+                            <span id="recoveryCountdownClock" class="font-mono text-xs font-bold text-accent">02:00</span>
+                            <p class="text-[9px] text-muted mt-0.5">Remaining validation window timeframe</p>
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted block mb-1">Enter Secret Code</label>
+                            <input type="text" id="recoveryOTPField" placeholder="######" class="w-full p-3 rounded-xl text-center font-mono tracking-widest text-sm bg-canvas border border-rose-gold/20 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-muted block mb-1">Construct New Password</label>
+                            <input type="password" id="recoveryNewPasswordField" placeholder="••••••••••••" class="w-full p-3 rounded-xl text-xs bg-canvas border border-rose-gold/20 focus:outline-none">
+                        </div>
+                        <button type="button" onclick="submitPasswordRewriteVerification()" class="w-full bg-accent text-white font-sans font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:opacity-90 transition-opacity">
+                            Rebuild Password Key
+                        </button>
+                    </div>
+
+                    <button type="button" onclick="abortRecoveryWorkflow()" class="w-full border border-rose-gold/30 text-muted font-sans font-bold py-2.5 rounded-xl text-[10px] uppercase tracking-wider text-center mt-2 block">
+                        Return to Login View
+                    </button>
+                </div>
+
+                <div id="profileContainer" class="hidden text-left space-y-4">
+                    <div class="w-16 h-16 bg-green-500/10 border border-green-500/20 text-green-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-2">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-accent text-center border-b border-rose-gold/10 pb-2">Account Profile Hub</h3>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-0.5">Account Holder Name (Locked)</label>
+                            <div id="profileName" class="w-full bg-stone-100 dark:bg-stone-900/60 text-muted border border-stone-200 px-3 py-2 rounded-xl text-xs font-bold"></div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-muted mb-0.5">Registered Email Terminal</label>
+                            <input type="email" id="profileEmailInput" class="w-full p-2.5 rounded-xl text-xs bg-canvas border border-rose-gold/20">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-muted mb-0.5">Mobile Phone Number</label>
+                            <input type="tel" id="profilePhoneInput" class="w-full p-2.5 rounded-xl text-xs bg-canvas border border-rose-gold/20">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-wider text-muted mb-0.5">Current Country Station</label>
+                                <select id="profileCountryInput" class="w-full p-2.5 rounded-xl text-xs bg-canvas border border-rose-gold/20 font-bold appearance-none">
+                                    <option value="Nigeria">Nigeria (₦)</option>
+                                    <option value="Ghana">Ghana (₵)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-wider text-muted mb-0.5">Delivery Address</label>
+                                <input type="text" id="profileAddressInput" class="w-full p-2.5 rounded-xl text-xs bg-canvas border border-rose-gold/20">
+                            </div>
+                        </div>
+                        <button onclick="triggerAccountParameterModification()" class="w-full bg-accent text-white font-sans font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:opacity-90 transition-opacity mt-2">
+                            Save Profile Details 
+                        </button>
+                        
+                        <div class="border-t border-red-500/20 pt-4 mt-4">
+                            <button type="button" onclick="revealDeleteAccountWorkflow()" class="w-full bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-widest border border-red-600/20 transition-all text-center">
+                                Delete Account
+                            </button>
+                        </div>
+                        
+                        <p id="profileMeta" class="text-center text-[9px] font-mono font-bold text-muted uppercase tracking-wider pt-1"></p>
+                    </div>
+                </div>
+
+                <div id="deleteAccountContainer" class="hidden text-center space-y-4 py-2">
+                    <div class="text-red-600 text-3xl animate-bounce"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-sm font-bold text-red-600 tracking-wide uppercase">Destructive Action Warning</h3>
+                        <p class="text-[11px] text-muted leading-relaxed">This action cannot be undone. All active shopping records, saved collections, and validation matrices inside this terminal profile will be permanently purged.</p>
+                    </div>
+                    <div class="space-y-3 text-left">
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-red-600 block mb-1">Enter Verification Code to Confirm</label>
+                            <input type="text" id="deleteAccountConfirmCodeField" placeholder="######" class="w-full p-3 rounded-xl text-center font-mono tracking-widest text-sm bg-canvas border border-red-500/30 focus:outline-none">
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="abortDeleteAccountWorkflow()" class="w-1/2 bg-canvas border border-rose-gold py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">Cancel</button>
+                            <button type="button" onclick="executeProfilePurgePipeline()" class="w-1/2 bg-red-600 text-white py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md hover:bg-red-700 transition-colors">Purge Registry</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bg-surface rounded-2xl p-5 shadow-xl border border-accent/10 space-y-3">
+                <h3 class="font-serif text-sm font-bold text-accent tracking-wide uppercase">Interactive Support Desk</h3>
+                <p class="text-muted leading-relaxed text-[11px]">Inquire about custom wholesale pricing structures or bundle drops. Type your context details here first, then select your delivery stream.</p>
+                
+                <textarea id="footerMessageArea" rows="3" placeholder="Write message details or customized wig specs here..." class="w-full bg-canvas border border-accent/20 rounded-xl p-3 focus:outline-none focus:border-accent resize-none text-xs"></textarea>
+                
+                <button onclick="toggleChannelRoutingDrawer()" class="w-full bg-accent text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 transition-all">
+                    <span>Send Message</span> <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                </button>
+
+                <div id="channelRoutingDrawer" class="hidden border-t border-rose-gold/20 pt-3 mt-2 space-y-2 animate-[fadeIn_0.2s_ease-out]">
+                    <p class="text-[10px] uppercase font-bold tracking-wider text-muted text-center">Choose Communication Pipeline:</p>
+                    <div class="flex gap-2">
+                        <button onclick="sendMessageViaPipeline('whatsapp')" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-colors text-xs shadow-sm">
+                            <i class="fa-brands fa-whatsapp"></i> Whatsapp
+                        </button>
+                        <button onclick="sendMessageViaPipeline('email')" class="flex-1 bg-zinc-800 hover:bg-black text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-colors text-xs shadow-sm">
+                            <i class="fa-solid fa-envelope"></i> Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-inbox" class="app-view hidden max-w-xl mx-auto">
+            <h2 class="font-serif text-xl font-bold mb-4 text-accent">Order Ledger Archive</h2>
+            <div id="inboxList" class="space-y-3">
+                <p class="text-xs opacity-50 text-center py-10">No matching manifests processed yet inside this profile loop.</p>
+            </div>
+        </section>
+
+        <section id="view-wishlist" class="app-view hidden max-w-xl mx-auto">
+            <h2 class="font-serif text-xl font-bold mb-4 text-accent">Saved Favorites</h2>
+            <div id="wishlistGrid" class="grid grid-cols-2 gap-4"></div>
+        </section>
+
+        <div id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-surface p-6 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col border-l border-rose-gold/20">
+            <div class="flex items-center justify-between border-b border-rose-gold/10 pb-4 mb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-accent"></i>
+                    <h2 class="font-serif text-base font-bold">Shopping Bag</h2>
+                </div>
+                <button id="closeCartBtn" class="text-accent hover:opacity-70"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="cartItemsList" class="flex-1 overflow-y-auto space-y-4 pr-1"></div>
+            <div class="border-t border-rose-gold/10 pt-4 mt-4 space-y-3">
+                <div class="flex gap-2">
+                    <a href="https://wa.link/bzgkay" target="_blank" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl text-center flex items-center justify-center gap-1.5 transition-colors text-xs shadow-sm">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="tel:+2348090887714" class="flex-1 bg-zinc-800 hover:bg-black text-white font-bold py-2.5 rounded-xl text-center flex items-center justify-center gap-1.5 transition-colors text-xs shadow-sm">
+                        <i class="fa-solid fa-phone"></i> Call
+                    </a>
+                </div>
+                <div class="flex justify-between font-bold text-sm pt-1">
+                    <span>Aggregate Settlement Total:</span>
+                    <span id="cartTotal" class="text-accent text-base">₦0.00</span>
+                </div>
+                <button onclick="proceedToCheckout()" class="w-full bg-accent text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-md">
+                    Pay Securely via Paystack
+                </button>
+            </div>
+        </div>
+
+        <section id="view-admin" class="app-view hidden max-w-3xl mx-auto bg-surface rounded-2xl p-6 border border-accent/20 shadow-xl">
+            <div class="flex items-center justify-between border-b border-rose-gold/10 pb-4 mb-5">
+                <div>
+                    <h2 class="font-serif text-xl font-bold text-accent">Owner Inventory Core</h2>
+                    <p class="text-xs text-muted">Upload fresh hair unit specifications or purge old listings.</p>
+                </div>
+                <button type="button" onclick="switchView('storefront')" class="text-xs px-3 py-1.5 bg-canvas border border-accent/20 rounded-lg font-semibold">
+                    Close Panel
+                </button>
+            </div>
+            
+            <form id="adminProductForm" class="grid md:grid-cols-2 gap-4" onsubmit="handleAdminProductSubmit(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 opacity-70">Hair Unit Name</label>
+                        <input type="text" id="adminTitle" required placeholder="e.g. Vietnamese Silk Straight" class="w-full bg-canvas border border-accent/20 rounded-xl px-4 py-2 text-xs focus:outline-none focus:border-accent">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 opacity-70">Product Photo (Upload from Device)</label>
+                        <input type="file" id="adminImage" accept="image/*" required onchange="handleAdminImageSelect(event)" class="w-full bg-canvas border border-accent/20 rounded-xl px-4 py-2 text-xs focus:outline-none focus:border-accent file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-accent file:text-white file:cursor-pointer cursor-pointer">
+                        <div id="adminImagePreviewWrap" class="hidden mt-2">
+                            <img id="adminImagePreview" class="w-20 h-20 rounded-lg object-cover border border-accent/20" src="" alt="Preview">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 opacity-70">Boutique Listing Price (₦ - NGN Base)</label>
+                        <div class="flex items-center gap-2 bg-canvas border border-accent/20 rounded-xl px-3 py-2">
+                            <button type="button" onclick="adjustAdminPrice(-1000)" class="w-7 h-7 flex items-center justify-center bg-surface border border-rose-gold/10 rounded-lg text-xs font-bold flex-shrink-0 hover:bg-red-50 hover:text-red-600 transition-colors"><i class="fa-solid fa-minus"></i></button>
+                            <div class="flex items-center flex-1 gap-1">
+                                <span class="text-accent font-bold text-xs flex-shrink-0">₦</span>
+                                <input type="number" id="adminPriceInput" value="150000" min="0" step="1000" oninput="syncAdminPrice()" class="flex-1 bg-transparent border-none text-xs font-bold text-primary focus:outline-none min-w-0" placeholder="Enter price...">
+                            </div>
+                            <button type="button" onclick="adjustAdminPrice(1000)" class="w-7 h-7 flex items-center justify-center bg-surface border border-rose-gold/10 rounded-lg text-xs font-bold flex-shrink-0 hover:bg-green-50 hover:text-green-600 transition-colors"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 opacity-70">Product Detail Metrics</label>
+                        <textarea id="adminDescription" required rows="3" placeholder="Input parameters clearly..." class="w-full bg-canvas border border-accent/20 rounded-xl px-4 py-2 text-xs focus:outline-none focus:border-accent resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 opacity-70">Quantities Allocated</label>
+                        <div class="flex items-center gap-2 bg-canvas border border-accent/20 rounded-xl p-1.5 w-max">
+                            <button type="button" onclick="adjustAdminStock(-1)" class="w-7 h-7 flex items-center justify-center bg-surface border border-rose-gold/10 rounded-lg text-xs font-bold hover:bg-red-50 hover:text-red-600 transition-colors"><i class="fa-solid fa-minus"></i></button>
+                            <input type="number" id="adminStockInput" value="5" min="1" oninput="syncAdminStock()" class="font-sans font-bold text-sm text-center bg-transparent border-none focus:outline-none w-16 text-primary">
+                            <button type="button" onclick="adjustAdminStock(1)" class="w-7 h-7 flex items-center justify-center bg-surface border border-rose-gold/10 rounded-lg text-xs font-bold hover:bg-green-50 hover:text-green-600 transition-colors"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-accent text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-md">
+                        Publish to Live Storefront
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-rose-gold/20 space-y-4">
+                <div class="flex flex-col gap-1">
+                    <h3 class="font-serif text-sm font-bold text-accent uppercase tracking-wide">Present Active Products</h3>
+                    <p class="text-[11px] text-muted leading-relaxed">Below is the live catalog. Adjust stock levels directly or click remove to instantly purge any item.</p>
+                </div>
+            
+                <div id="adminInventoryGrid" class="grid grid-cols-1 gap-3 max-h-[300px] overflow-y-auto pr-1">
+                    <p class="text-xs text-stone-400 italic">Syncing active catalog database pipeline...</p>
+                </div>
+            </div>
+        </section>
+        <div id="receiptModal" class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+            <div class="bg-surface w-full max-w-md rounded-2xl shadow-2xl border border-rose-gold/20 max-h-[90vh] flex flex-col">
+                <div id="receiptContent" class="flex-1 overflow-y-auto p-6"></div>
+                <div class="flex gap-3 p-4 border-t border-rose-gold/10 flex-shrink-0">
+                    <button onclick="printReceipt()" class="flex-1 bg-accent text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-md"><i class="fa-solid fa-print"></i> Print / Save PDF</button>
+                    <button onclick="closeReceiptModal()" class="flex-1 bg-canvas border border-accent/20 font-bold py-2.5 rounded-xl text-xs uppercase tracking-widest">Close</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-surface border-t border-rose-gold/30 mt-28 text-xs text-primary">
+        <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col items-center text-center border-b border-rose-gold/10 space-y-4">
+            <div class="space-y-1 text-xs text-muted">
+                <h4 class="font-serif font-bold text-accent tracking-wide text-sm mb-1 uppercase">Contact Registry</h4>
+                <p><span class="font-bold text-primary">Business Name:</span> EsthyCee Hair World</p>
+                <p><span class="font-bold text-primary">Address:</span> Opposite Unizik junction, Awka, Anambra State</p>
+                <p><span class="font-bold text-primary">Phone Number:</span> +2348090887714</p>
+                <p><span class="font-bold text-primary">Email Link:</span> akpulonuchidinma@gmail.com</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col items-center justify-center space-y-4">
+            <div id="footerLogoutContainer" class="hidden">
+                <button onclick="handleLogout()" class="text-xs font-bold uppercase tracking-widest text-accent hover:underline bg-canvas border border-accent/20 px-6 py-2 rounded-xl transition-all">
+                    LOGOUT
+                </button>
+            </div>
+            <div class="text-[10px] text-muted tracking-wider text-center font-medium">
+                &copy; 2026 EsthyCee Hair World. All Rights Reserved. Built securely via mollyloord.
+            </div>
+        </div>
+    </footer>
+
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 bg-accent text-white px-5 py-3 rounded-xl shadow-2xl text-xs font-semibold transform translate-y-20 opacity-0 transition-all duration-300"></div>
+
+    <script src="app.js" defer></script>
+</body>
+</html>

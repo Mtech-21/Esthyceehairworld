@@ -1,0 +1,176 @@
+:root {
+    --color-canvas: #FAF6F0;       
+    --color-surface: #FFFFFF;      
+    --color-primary: #1C1917;      
+    --color-muted: #78716C;        
+    --color-accent: #5C134F;       
+    --color-rose-gold: #E7C2B3;    
+}
+
+body.dark {
+    --color-canvas: #120310;       
+    --color-surface: #250A21;      
+    --color-primary: #FFF7ED;      
+    --color-muted: #A8A29E;        
+    --color-accent: #E289C4;       
+    --color-rose-gold: #4C1D42;    
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-canvas);
+    color: var(--color-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+button, 
+input[type="submit"], 
+.btn-core {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.75rem !important; 
+    font-weight: 700 !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button[type="submit"],
+.bg-accent {
+    background-color: var(--color-accent) !important;
+    color: #FFFFFF !important; 
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+body.dark button[type="submit"],
+body.dark .bg-accent {
+    background-color: var(--color-accent) !important;
+    color: #120310 !important; 
+    text-shadow: none;
+}
+
+button:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+}
+
+input, select, textarea {
+    background-color: var(--color-canvas) !important;
+    color: var(--color-primary) !important;
+    border: 1px solid rgba(175, 120, 150, 0.2) !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--color-accent) !important;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(92, 19, 79, 0.15);
+}
+
+select option {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+}
+
+input[readonly], div[id="profileName"] {
+    background-color: rgba(120, 113, 108, 0.08) !important;
+    color: var(--color-muted) !important;
+    border-color: rgba(120, 113, 108, 0.2) !important;
+    cursor: not-allowed;
+    font-weight: 600;
+}
+
+body.dark input[readonly], body.dark div[id="profileName"] {
+    background-color: rgba(255, 247, 237, 0.05) !important;
+}
+
+.product-card-container {
+    position: relative;
+}
+
+.favorite-heart-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none !important;
+    color: #78716C;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+body.dark .favorite-heart-btn {
+    background-color: rgba(37, 10, 33, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.favorite-heart-btn.active {
+    color: #EF4444 !important;
+}
+
+.favorite-heart-btn:hover {
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#channelRoutingDrawer {
+    animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.bg-canvas { background-color: var(--color-canvas); }
+.bg-surface { background-color: var(--color-surface); }
+.text-primary { color: var(--color-primary); }
+.text-muted { color: var(--color-muted); }
+.text-accent { color: var(--color-accent); }
+.border-rose-gold { border-color: var(--color-rose-gold); }
+
+.line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-canvas);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-rose-gold);
+    border-radius: 10px;
+}
